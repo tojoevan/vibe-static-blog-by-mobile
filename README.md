@@ -1,0 +1,1 @@
+# vibe-static-blog-by-mobile
