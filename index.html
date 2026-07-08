@@ -65,14 +65,6 @@
             margin-bottom: 3rem;
         }
 
-        section h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
         /* 微博/碎碎念样式 */
         .micro-item {
             background-color: var(--card-bg);
@@ -96,6 +88,27 @@
             white-space: pre-wrap;
         }
 
+        /* 分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         footer {
             text-align: center;
             margin-top: 5rem;
@@ -114,43 +127,73 @@
         </header>
 
         <section id="main">
-            
-            <div class="micro-item">
-                <div class="micro-meta">
-                    <span>2026-07-08</span>
-                    <span>📍 南京</span>
-                </div>
-                <div class="micro-content">欢迎来到我的个人独立博客！</div>
-            </div>
-            
-            <div class="micro-item">
-                <div class="micro-meta">
-                    <span>2026-07-07</span>
-                    <span>📍 南京</span>
-                </div>
-                <div class="micro-content">如何构建一个极简且纯净的静态博客系统</div>
-            </div>
-
-            <div class="micro-item">
-                <div class="micro-meta">
-                    <span>2026-07-08 10:30</span>
-                    <span>📍 南京</span>
-                </div>
-                <div class="micro-content">今天把个人博客和微博（碎碎念）功能整合到了一个单页面中。极简的设计能让人更专注于写作和记录。</div>
-            </div>
-
-            <div class="micro-item">
-                <div class="micro-meta">
-                    <span>2026-07-07 18:15</span>
-                    <span>📍 南京</span>
-                </div>
-                <div class="micro-content">夏天的傍晚总是格外温柔，适合散步和发呆。🌅</div>
-            </div>
+            <div id="content-container"></div>
+            <div id="pagination" class="pagination"></div>
         </section>
 
         <footer>
             <p>© 2026 Kapibala.icu. Powered by Joeloz.</p>
         </footer>
     </div>
+
+    <script>
+        const posts = [
+            { date: "2026-07-08 10:30", location: "南京", content: "今天把个人博客和微博（碎碎念）功能整合到了一个单页面中。极简的设计能让人更专注于写作和记录。" },
+            { date: "2026-07-08 09:00", location: "南京", content: "欢迎来到我的个人独立博客！" },
+            { date: "2026-07-07 18:15", location: "南京", content: "夏天的傍晚总是格外温柔，适合散步和发呆。🌅" },
+            { date: "2026-07-07 10:00", location: "南京", content: "如何构建一个极简且纯净的静态博客系统" },
+        ];
+
+        // Sort by date newest first
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        const itemsPerPage = 10;
+        let currentPage = 1;
+
+        function renderPage() {
+            const container = document.getElementById('content-container');
+            container.innerHTML = '';
+            
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageItems = posts.slice(start, end);
+            
+            pageItems.forEach(post => {
+                const item = document.createElement('div');
+                item.className = 'micro-item';
+                item.innerHTML = `
+                    <div class="micro-meta">
+                        <span>${post.date}</span>
+                        <span>📍 ${post.location}</span>
+                    </div>
+                    <div class="micro-content">${post.content}</div>
+                `;
+                container.appendChild(item);
+            });
+            
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            const totalPages = Math.ceil(posts.length / itemsPerPage);
+            
+            const prevBtn = document.createElement('button');
+            prevBtn.innerText = '前一页';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => { currentPage--; renderPage(); };
+            pagination.appendChild(prevBtn);
+            
+            const nextBtn = document.createElement('button');
+            nextBtn.innerText = '后一页';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => { currentPage++; renderPage(); };
+            pagination.appendChild(nextBtn);
+        }
+
+        renderPage();
+    </script>
 </body>
 </html>
