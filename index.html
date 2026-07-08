@@ -61,21 +61,6 @@
             font-size: 1rem;
         }
 
-        .nav-links {
-            margin-top: 1rem;
-        }
-
-        .nav-links a {
-            color: var(--accent-color);
-            text-decoration: none;
-            margin: 0 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-
         section {
             margin-bottom: 3rem;
         }
@@ -86,28 +71,6 @@
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
-        }
-
-        /* 博客文章样式 */
-        .post-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .post-meta {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 0.25rem;
-        }
-
-        .post-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        .post-title:hover {
-            color: var(--accent-color);
         }
 
         /* 微博/碎碎念样式 */
@@ -148,35 +111,31 @@
         <header>
             <h1>Kapibala</h1>
             <p>记录生活、思考与技术碎碎念</p>
-            <div class="nav-links">
-                <a href="#blog">博客</a>
-                <a href="#weibo">微博 (碎碎念)</a>
-            </div>
         </header>
 
-        <!-- 博客文章 Section -->
-        <section id="blog">
-            <h2>近期文章</h2>
-            
-            <div class="post-item">
-                <div class="post-meta">2026-07-08</div>
-                <a href="#" class="post-title">欢迎来到我的个人独立博客！</a>
-            </div>
-            
-            <div class="post-item">
-                <div class="post-meta">2026-07-07</div>
-                <a href="#" class="post-title">如何构建一个极简且纯净的静态博客系统</a>
-            </div>
-        </section>
-
-        <!-- 微博/碎碎念 Section -->
-        <section id="weibo">
-            <h2>微博 / 碎碎念</h2>
+        <section id="main">
+            <h2>内容记录</h2>
             
             <div class="micro-item">
                 <div class="micro-meta">
+                    <span>2026-07-08</span>
+                    <span>📍 南京</span>
+                </div>
+                <div class="micro-content">欢迎来到我的个人独立博客！</div>
+            </div>
+            
+            <div class="micro-item">
+                <div class="micro-meta">
+                    <span>2026-07-07</span>
+                    <span>📍 南京</span>
+                </div>
+                <div class="micro-content">如何构建一个极简且纯净的静态博客系统</div>
+            </div>
+
+            <div class="micro-item">
+                <div class="micro-meta">
                     <span>2026-07-08 10:30</span>
-                    <span>📍 杭州</span>
+                    <span>📍 南京</span>
                 </div>
                 <div class="micro-content">今天把个人博客和微博（碎碎念）功能整合到了一个单页面中。极简的设计能让人更专注于写作和记录。</div>
             </div>
@@ -184,7 +143,7 @@
             <div class="micro-item">
                 <div class="micro-meta">
                     <span>2026-07-07 18:15</span>
-                    <span>📍 杭州</span>
+                    <span>📍 南京</span>
                 </div>
                 <div class="micro-content">夏天的傍晚总是格外温柔，适合散步和发呆。🌅</div>
             </div>
