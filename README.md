@@ -35,7 +35,17 @@ pip3 install pyTelegramBotAPI GitPython
 ### 3. 设置您的 Telegram Bot
 1. 在 Telegram 搜索 [@BotFather](https://t.me/BotFather)，发送 `/newbot` 创建机器人，获取 **Token**。
 2. 将此仓库 Clone 到您的 VPS。
-3. 创建 `.env` 文件（不要上传此文件！）：
+
+### 4. 初始化（清理演示数据）
+因为仓库包含了演示用的历史文章数据，在开始使用前，请运行以下命令一键清空：
+
+```bash
+python3 reset_blog.py
+```
+*(该操作会清空 index.html 中的历史文章列表，请确认后操作)*
+
+### 5. 配置环境
+创建 `.env` 文件（不要上传此文件！）：
    ```bash
    # 项目目录下的 .env
    TG_TOKEN=您的_BOT_TOKEN
@@ -44,10 +54,10 @@ pip3 install pyTelegramBotAPI GitPython
    ```
    *注意：若不知道 `MY_TG_ID`，启动机器人后，使用您的账号发送 `/start`，机器人回复中会显示该 ID。*
 
-### 4. 适配您的网站
+### 6. 适配您的网站
 由于每个静态网站的 HTML 结构不同，您需要修改 `pybot.py` 中的 `insert_post_into_index_html` 函数，以适配您的 `index.html` 或对应文章列表文件的 JSON/JS 插入逻辑。
 
-### 5. 启动与后台运行
+### 7. 启动与后台运行
 在仓库目录下直接运行测试：
 ```bash
 python3 pybot.py
