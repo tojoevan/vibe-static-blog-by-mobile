@@ -23,17 +23,10 @@ if os.path.exists(env_path):
 
 TG_TOKEN = os.environ.get("TG_TOKEN")
 
-<<<<<<< HEAD
 # 你的 Telegram User IDs (用于安全校验，支持多个，逗号分隔，只有受信任的用户能操作机器人)
 # 你可以通过向机器人发送 /start 命令来获取你的 User ID
 MY_TG_IDS_STR = os.environ.get("MY_TG_IDS", "")
 TRUSTED_TG_IDS = [int(id.strip()) for id in MY_TG_IDS_STR.split(",") if id.strip().isdigit()]
-=======
-# 你的 Telegram User ID (用于安全校验，只有你自己能操作机器人)
-# 你可以通过向机器人发送 /start 命令来获取你的 User ID
-MY_TG_ID_STR = os.environ.get("MY_TG_ID")
-MY_TG_ID = int(MY_TG_ID_STR) if (MY_TG_ID_STR and MY_TG_ID_STR.isdigit()) else None
->>>>>>> 9889973 (Optimize vertical spacing and add Kapibala reader link)
 
 # 发布微博/碎碎念时的默认定位
 DEFAULT_LOCATION = os.environ.get("DEFAULT_LOCATION", "南京")
@@ -111,11 +104,7 @@ def send_welcome(message):
     welcome_text = (
         f"👋 **你好！我是你的静态微博/碎碎念发布助手。**\n\n"
         f"你的 Telegram User ID 是: `{current_user_id}`\n"
-<<<<<<< HEAD
         f"请确保将其配置在 `pybot.py` 对应的 `.env` 文件中 `MY_TG_IDS` 字段里 (多个ID可用逗号分隔)，以解锁机器人操作权限。\n\n"
-=======
-        f"请确保将其配置在 `pybot.py` 的 `MY_TG_ID` 中，以解锁机器人操作权限。\n\n"
->>>>>>> 9889973 (Optimize vertical spacing and add Kapibala reader link)
         f"🚀 **使用步骤:**\n"
         f"1️⃣ 发送 `/new` 或 `/new <主题内容>` 开始创作。\n"
         f"2️⃣ 机器人会自动适配您的 AI 提示词模板并发送给您。\n"
@@ -128,11 +117,7 @@ def send_welcome(message):
 # 第一步：发送 /new 触发写微博流程
 @bot.message_handler(commands=['new'])
 def start_new_blog(message):
-<<<<<<< HEAD
     if message.from_user.id not in TRUSTED_TG_IDS:
-=======
-    if message.from_user.id != MY_TG_ID:
->>>>>>> 9889973 (Optimize vertical spacing and add Kapibala reader link)
         print(f"⚠️ 拒绝未授权的用户访问: {message.from_user.id}")
         return
     
@@ -148,11 +133,7 @@ def start_new_blog(message):
 
 # 中转步骤：接收异步发送的主题
 def receive_topic(message):
-<<<<<<< HEAD
     if message.from_user.id not in TRUSTED_TG_IDS: 
-=======
-    if message.from_user.id != MY_TG_ID: 
->>>>>>> 9889973 (Optimize vertical spacing and add Kapibala reader link)
         return
     topic = message.text.strip() if message.text else ""
     if not topic:
@@ -178,11 +159,7 @@ def generate_prompt_from_topic(message, topic):
 
 # 第三步：接收正文，自动更新 index.html 并提交发布
 def handle_blog_content(message):
-<<<<<<< HEAD
     if message.from_user.id not in TRUSTED_TG_IDS: 
-=======
-    if message.from_user.id != MY_TG_ID: 
->>>>>>> 9889973 (Optimize vertical spacing and add Kapibala reader link)
         return
     content = message.text.strip() if message.text else ""
     
@@ -247,17 +224,10 @@ if __name__ == "__main__":
         masked_token = TG_TOKEN[:10] + "..." + TG_TOKEN[-5:] if len(TG_TOKEN) > 15 else "***"
         print(f"✅ TG_TOKEN 已加载: {masked_token}")
         
-<<<<<<< HEAD
     if not TRUSTED_TG_IDS:
         print("⚠️  警告: TRUSTED_TG_IDS 未配置！外部用户消息将被忽略。请向机器人发送 /start 获取你的 TG ID。")
     else:
         print(f"🔒 授权用户 IDs: {TRUSTED_TG_IDS}")
-=======
-    if MY_TG_ID is None:
-        print("⚠️  警告: MY_TG_ID 未配置！外部用户消息将被忽略。请向机器人发送 /start 获取你的 TG ID。")
-    else:
-        print(f"🔒 授权用户 ID: {MY_TG_ID}")
->>>>>>> 9889973 (Optimize vertical spacing and add Kapibala reader link)
     print("=" * 50)
     
     # 启动轮询
